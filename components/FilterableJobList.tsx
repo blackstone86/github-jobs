@@ -30,7 +30,7 @@ function Filters() {
 }
 
 export function FilterableJobList() {
-  const [keyword, setKeyword] = useState("");
+  const [keyword, setKeyword] = useState<string>("");
   const { jobs, isLoading, error } = useJobs({ keyword });
 
   return (
