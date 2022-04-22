@@ -8,8 +8,8 @@ type JobType = {
 	url: string // 职位详情线上地址
 	description: string // 职位描述
 	created_at?: string // 创建时间
-	company_url?: string // 公司官网
-	company_logo?: string // 公司logo
+	company_url?: string | null // 公司官网
+	company_logo?: string | null // 公司logo
 }
 
 export default JobType
