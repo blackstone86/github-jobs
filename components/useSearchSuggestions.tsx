@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const terms = [
+const terms:string[] = [
   "GitHub",
   "JavaScript",
   "Java",
@@ -11,27 +11,27 @@ const terms = [
   "Engineer",
   "InVision",
 ];
+
 const SuggestionsAPI = {
-  load(keyword) {
+  load(keyword: string): Promise<string[]> {
     return new Promise((resolve) => {
       if (keyword.length === 0) resolve([]);
       else
         setTimeout(() => {
-          resolve(
-            terms.filter((term) =>
-              term.toLowerCase().includes(keyword.toLowerCase())
-            )
-          );
+          resolve(terms.filter((term: string) =>
+            term.toLowerCase().includes(keyword.toLowerCase())
+          ));
         }, 500);
     });
   },
 };
-export function useSearchSuggestions(keyword) {
-  const [suggestions, setSuggestions] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+
+export function useSearchSuggestions(keyword: string) {
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   useEffect(() => {
     setIsLoading(true);
-    SuggestionsAPI.load(keyword).then((result) => {
+    SuggestionsAPI.load(keyword).then((result: string[]) => {
       setSuggestions(result);
       setIsLoading(false);
     });
