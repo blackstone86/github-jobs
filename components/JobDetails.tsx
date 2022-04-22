@@ -2,8 +2,14 @@ import React from "react";
 import { Header } from "./Header";
 import { useJob } from "./useJobs";
 import Link from "next/link";
+import Job from '../types/job';
 
-export function JobDetailsStatic({ isLoading, job }) {
+type JobDetailsStaticProps = {
+  job: Job
+  isLoading: boolean
+}
+
+export function JobDetailsStatic({ isLoading, job }: JobDetailsStaticProps) {
   const {
     type,
     company,
@@ -38,7 +44,11 @@ export function JobDetailsStatic({ isLoading, job }) {
   );
 }
 
-export function JobDetails({ id }) {
+type JobDetailsProps = {
+  id: string
+}
+
+export function JobDetails({ id }: JobDetailsProps) {
   const { job, isLoading, error } = useJob(id);
   return (
     <div>
