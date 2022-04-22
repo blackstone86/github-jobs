@@ -49,5 +49,5 @@ export function useJobs({ keyword, id }: Props) {
 
 export function useJob(id: string) {
   const { jobs, isLoading, error } = useJobs({ id });
-  return { job: jobs, isLoading, error };
+  return { job: jobs[0], isLoading, error };
 }
