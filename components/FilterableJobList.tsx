@@ -36,7 +36,7 @@ export function FilterableJobList() {
   return (
     <div className="job-list">
       <Header>
-        <SearchForm onKeywordChange={(k) => setKeyword(k)} />
+        <SearchForm onKeywordChange={(k:string) => setKeyword(k)} />
       </Header>
       <Filters />
       {error ? (
