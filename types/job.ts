@@ -6,9 +6,9 @@ type JobType = {
 	location: string // 工作地点 
 	title: string // 职位标题
 	url: string // 职位详情线上地址
+	description: string // 职位描述
 	created_at?: string // 创建时间
 	company_url?: string // 公司官网
-	description?: string // 职位描述
 	company_logo?: string // 公司logo
 }
 
