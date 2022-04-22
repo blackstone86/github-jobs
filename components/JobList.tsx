@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Job from '../types/job';
 
 function JobCard({
   type,
@@ -9,7 +10,7 @@ function JobCard({
   title,
   created_at,
   id,
-}) {
+}: Job) {
   return (
     <Link href={`/jobs/${id}`}>
       <article className="job-card">
@@ -24,7 +25,11 @@ function JobCard({
   );
 }
 
-function LoadingCards({ count }) {
+type LoadingCardsProps = {
+  count: number
+}
+
+function LoadingCards({ count }: LoadingCardsProps) {
   return (
     <>
       {Array(count)
@@ -41,7 +46,12 @@ function LoadingCards({ count }) {
   );
 }
 
-export function JobList({ jobs, isLoading }) {
+type JobListProps = {
+  jobs: Job[]
+  isLoading: boolean
+}
+
+export function JobList({ jobs, isLoading }: JobListProps) {
   return (
     <div className="results">
       {isLoading ? (
