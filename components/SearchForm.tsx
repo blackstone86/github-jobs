@@ -2,6 +2,15 @@ import React from "react";
 import { useState } from "react";
 import { useSearchSuggestions } from "./useSearchSuggestions";
 
+type SearchFormStaticProps = {
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  suggestions: string[]
+  isLoading: boolean
+  value: string
+  onSuggestionClick: (s: string) => void
+}
+
 export function SearchFormStatic({
   onSubmit,
   onChange,
@@ -9,14 +18,13 @@ export function SearchFormStatic({
   isLoading,
   value,
   onSuggestionClick,
-}) {
+}: SearchFormStaticProps) {
   return (
     <form className="search-form" onSubmit={onSubmit}>
       <input type="search" value={value} onChange={onChange} />
       {isLoading ? (
         <ul className="loading suggestions">...</ul>
       ) : (
-        suggestions &&
         suggestions.length > 0 && (
           <ul className="suggestions">
             {suggestions.map((s) => (
@@ -38,32 +46,36 @@ export function SearchFormStatic({
   );
 }
 
-export function SearchForm({ onKeywordChange }) {
-  const [term, setTerm] = useState("");
+type SearchFormProps = {
+  onKeywordChange: (keyword: string) => void
+}
+
+export function SearchForm({ onKeywordChange }: SearchFormProps) {
+  const [term, setTerm] = useState<string>("");
   const { suggestions, isLoading } = useSearchSuggestions(term);
-  const [showSuggestions, setShowSuggestions] = useState(true);
-  function dispatchKeywordChange(k) {
+  const [showSuggestions, setShowSuggestions] = useState<boolean>(true);
+  function dispatchKeywordChange(k: string) {
     typeof onKeywordChange === "function" && onKeywordChange(k);
     setShowSuggestions(false);
   }
 
   return (
     <SearchFormStatic
-      onSubmit={(e) => {
+      onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatchKeywordChange(term);
       }}
-      onChange={(e) => {
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
         setTerm(e.target.value);
         setShowSuggestions(true);
         if (e.target.value.length === 0) dispatchKeywordChange("");
       }}
-      onSuggestionClick={(s) => {
+      onSuggestionClick={(s: string) => {
         setTerm(s);
         dispatchKeywordChange(s);
       }}
       value={term}
-      suggestions={showSuggestions && suggestions}
+      suggestions={ showSuggestions ? suggestions : [] }
       isLoading={isLoading}
     />
   );
