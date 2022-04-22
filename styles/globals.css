@@ -1,0 +1,270 @@
+body {
+  background-color: #f6f7fb;
+  font: 1em sans-serif;
+  color: #034680;
+}
+
+input[type="search"] {
+  border-radius: 2px;
+  border: none;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 8px;
+}
+
+.layout {
+  max-width: 800px;
+  margin: auto;
+}
+
+.job-list {
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: minmax(200px, auto) 1fr;
+}
+
+.header {
+  /* padding: 16px; */
+  grid-column: span 2;
+}
+
+.header h2 {
+  font-weight: 100;
+}
+
+.hero {
+  padding: 32px;
+  display: flex;
+  justify-content: center;
+  background-image: url(https://images.unsplash.com/photo-1571331245216-3f720e781a94?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80);
+  background-position: center;
+  background-size: cover;
+  border-radius: 4px;
+}
+
+.search-form {
+  background-color: #fff;
+  padding: 4px;
+  border-radius: 4px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  position: relative;
+}
+
+.search-form button {
+  background-color: #1f86ff;
+  color: #fff;
+  padding: 8px 24px 8px 24px;
+  box-shadow: inset 0px -3px 7px 0px #1f86ff;
+  border-radius: 3px;
+  border: none;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 15px;
+  padding: 9px 23px;
+  text-decoration: none;
+}
+
+.search-form button:hover {
+  background: linear-gradient(to bottom, #1f86ff 5%, #2dabf9 100%);
+  background-color: #0688fa;
+}
+.search-form button:active {
+  position: relative;
+  top: 1px;
+}
+
+.search-form input {
+  min-width: 300px;
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+
+.suggestions {
+  position: absolute;
+  top: 30px;
+  padding: 0;
+  border-radius: 4px;
+  min-width: 160px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  z-index: 1;
+}
+
+.suggestions li {
+  list-style: none;
+}
+
+.suggestions.loading {
+  min-width: 160px;
+  min-height: 20px;
+  padding: 16px;
+  background: #fff;
+}
+
+.suggestions li div {
+  padding: 8px 16px 8px 16px;
+}
+
+.suggestions li:first-child div {
+  padding-top: 16px;
+}
+
+.suggestions li:last-child div {
+  padding-bottom: 16px;
+}
+
+.suggestions li:hover {
+  cursor: default;
+  background-color: #1f86ff;
+  color: #fff;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+}
+
+.filters label {
+  margin-top: 16px;
+}
+
+.filters .location-title {
+  color: #aaa;
+  font-weight: 600;
+  margin: 16px 0 8px 0;
+}
+
+.filters fieldset {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+}
+
+.filters input {
+  margin-left: 0;
+  margin-right: 8px;
+}
+
+.filters input[type="search"] {
+  width: 100%;
+}
+
+.results {
+  display: grid;
+  grid-template-columns: auto;
+  grid-gap: 16px;
+}
+
+.error {
+  color: #f00;
+}
+
+.job-card {
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 50px auto 1fr 1fr;
+  grid-gap: 8px;
+  align-items: center;
+}
+
+.job-card .logo {
+  width: 50px;
+  grid-row: span 3;
+}
+
+.job-card .loading-logo {
+  width: 50px;
+  height: 80px;
+  border: none;
+}
+
+@keyframes shimming {
+  from {
+    background-position: 0%;
+  }
+  to {
+    background-position: 100%;
+  }
+}
+
+.loading {
+  background: linear-gradient(to left, #f0f0f0, #ddd, #f0f0f0);
+  background-size: 200%;
+  animation: shimming 1s alternate infinite running;
+  min-height: 20px;
+  min-width: 20px;
+}
+
+.job-card .company {
+  grid-column: span 3;
+  font-size: 0.8em;
+}
+
+.job-card .title {
+  grid-column: span 3;
+}
+
+.job-card .type {
+  font-size: 0.8em;
+  border: 1px solid blue;
+  padding: 4px;
+  border-radius: 4px;
+  justify-self: start;
+}
+
+.job-card .location {
+  font-size: 0.8em;
+  color: #aaa;
+  text-overflow: ellipsis;
+  justify-self: end;
+}
+
+.job-card .created-at {
+  font-size: 0.8em;
+  color: #aaa;
+  text-overflow: ellipsis;
+  justify-self: end;
+}
+
+.job-card .suggestions li {
+  list-style: none;
+}
+
+.job-details {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-gap: 48px;
+  line-height: 1.5;
+  margin-top: 16px;
+}
+
+.job-details h2 {
+  font-size: 1em;
+  text-transform: uppercase;
+  color: #999;
+  margin-top: 36px;
+}
+
+.job-details .how-to-apply {
+  overflow-wrap: break-word;
+  position: sticky;
+  top: 40px;
+}
+
+.job-details .logo {
+  width: 100px;
+}
+
+.job-details .created-at {
+  font-size: 0.9em;
+  color: #999;
+  margin-bottom: 16px;
+}
