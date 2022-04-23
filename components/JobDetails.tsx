@@ -45,7 +45,7 @@ export function JobDetailsStatic({ isLoading, job }: JobDetailsStaticProps) {
 }
 
 type JobDetailsProps = {
-  id: string
+  id: any
 }
 
 export function JobDetails({ id }: JobDetailsProps) {
