@@ -27,7 +27,6 @@ router.get('/job/:id', async (ctx) => {
 		return id === p.id;
 	})
 	ctx.body = job;
-	console.log(job);
 })
 
 router.get('/job', async (ctx) => {
