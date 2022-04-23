@@ -35,7 +35,7 @@ function LoadingCards({ count }: LoadingCardsProps) {
       {Array(count)
         .fill(0)
         .map((_, idx) => (
-          <article className="job-card">
+          <article key={idx} className="job-card">
             <div className="logo loading-logo loading" />
             <div className="company loading"> </div>
             <div className="title loading"> </div>
