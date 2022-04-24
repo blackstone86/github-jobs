@@ -4,7 +4,7 @@ body {
   color: #034680;
 }
 
-input[type="search"] {
+input[type='search'] {
   border-radius: 2px;
   border: none;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
@@ -149,7 +149,7 @@ input[type="search"] {
   margin-right: 8px;
 }
 
-.filters input[type="search"] {
+.filters input[type='search'] {
   width: 100%;
 }
 

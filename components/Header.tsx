@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode } from 'react'
 
 type Props = {
   children?: ReactNode
@@ -12,5 +12,5 @@ export function Header({ children }: Props) {
       </h2>
       <div className="hero">{children}</div>
     </div>
-  );
+  )
 }

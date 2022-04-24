@@ -1,12 +1,12 @@
-import React from "react";
-import { useState } from "react";
-import { JobList } from "./JobList";
-import { SearchForm } from "./SearchForm";
-import { Header } from "./Header";
-import { useJobs } from "./useJobs";
+import React from 'react'
+import { useState } from 'react'
+import { JobList } from './JobList'
+import { SearchForm } from './SearchForm'
+import { Header } from './Header'
+import { useJobs } from './useJobs'
 
 function Filters() {
-  const locations = ["London", "Amsterdam", "New York", "Berlin"];
+  const locations = ['London', 'Amsterdam', 'New York', 'Berlin']
   return (
     <div className="filters">
       <label>
@@ -26,17 +26,17 @@ function Filters() {
         ))}
       </fieldset>
     </div>
-  );
+  )
 }
 
 export function FilterableJobList() {
-  const [keyword, setKeyword] = useState<string>("");
-  const { jobs, isLoading, error } = useJobs({ keyword });
+  const [keyword, setKeyword] = useState<string>('')
+  const { jobs, isLoading, error } = useJobs({ keyword })
 
   return (
     <div className="job-list">
       <Header>
-        <SearchForm onKeywordChange={(k:string) => setKeyword(k)} />
+        <SearchForm onKeywordChange={(k: string) => setKeyword(k)} />
       </Header>
       <Filters />
       {error ? (
@@ -45,5 +45,5 @@ export function FilterableJobList() {
         <JobList jobs={jobs} isLoading={isLoading} />
       )}
     </div>
-  );
+  )
 }

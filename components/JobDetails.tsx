@@ -1,8 +1,8 @@
-import React from "react";
-import { Header } from "./Header";
-import { useJob } from "./useJobs";
-import Link from "next/link";
-import Job from '../types/job';
+import React from 'react'
+import { Header } from './Header'
+import { useJob } from './useJobs'
+import Link from 'next/link'
+import Job from '../types/job'
 
 type JobDetailsStaticProps = {
   job: Job
@@ -18,8 +18,8 @@ export function JobDetailsStatic({ isLoading, job }: JobDetailsStaticProps) {
     title,
     created_at,
     how_to_apply,
-    description,
-  } = job || {};
+    description
+  } = job || {}
   return (
     <div className="job-details">
       <div>
@@ -30,18 +30,18 @@ export function JobDetailsStatic({ isLoading, job }: JobDetailsStaticProps) {
         </div>
       </div>
       <div>
-        <h1 className={isLoading ? "title loading" : "title"}>{title}</h1>
+        <h1 className={isLoading ? 'title loading' : 'title'}>{title}</h1>
         <div className="created-at">{created_at}</div>
         <img className="logo" src={company_logo} />
         <div className="company">{company}</div>
         <div className="location">{location}</div>
         <div
-          className={isLoading ? "description loading" : "description"}
+          className={isLoading ? 'description loading' : 'description'}
           dangerouslySetInnerHTML={{ __html: description }}
         />
       </div>
     </div>
-  );
+  )
 }
 
 type JobDetailsProps = {
@@ -49,11 +49,11 @@ type JobDetailsProps = {
 }
 
 export function JobDetails({ id }: JobDetailsProps) {
-  const { job, isLoading, error } = useJob(id);
+  const { job, isLoading, error } = useJob(id)
   return (
     <div>
       <Header />
       <JobDetailsStatic job={job} isLoading={isLoading} />
     </div>
-  );
+  )
 }

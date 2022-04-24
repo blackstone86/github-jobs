@@ -1,6 +1,6 @@
-import React from "react";
-import Link from "next/link";
-import Job from '../types/job';
+import React from 'react'
+import Link from 'next/link'
+import Job from '../types/job'
 
 function JobCard({
   type,
@@ -9,7 +9,7 @@ function JobCard({
   location,
   title,
   created_at,
-  id,
+  id
 }: Job) {
   return (
     <Link href={`/jobs/${id}`}>
@@ -22,7 +22,7 @@ function JobCard({
         <div className="created-at">{created_at}</div>
       </article>
     </Link>
-  );
+  )
 }
 
 type LoadingCardsProps = {
@@ -43,7 +43,7 @@ function LoadingCards({ count }: LoadingCardsProps) {
           </article>
         ))}
     </>
-  );
+  )
 }
 
 type JobListProps = {
@@ -57,10 +57,10 @@ export function JobList({ jobs, isLoading }: JobListProps) {
       {isLoading ? (
         <LoadingCards count={5} />
       ) : jobs.length === 0 ? (
-        "No results"
+        'No results'
       ) : (
         jobs.map((job) => <JobCard {...job} key={job.id} />)
       )}
     </div>
-  );
+  )
 }
