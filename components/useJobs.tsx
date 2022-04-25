@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import axios from 'axios';
 import Job from '../types/job'
 
 type Props = {
@@ -8,31 +9,43 @@ type Props = {
   keyword?: string // 搜索关键字 对应职位记录的 title 字段
 }
 
-export function useJobs({ page, pageSize, id, keyword }: Props) {
+export function useJobs({ page = 1, pageSize = 10, id, keyword }: Props) {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>('')
   const [jobs, setJobs] = useState<Job[]>([])
   const [total, setTotal] = useState<number>(0)
-  const destUrl = id ? `/apis/job/${id}` : `/apis/job?search=${keyword}`
-  const url = destUrl
-
+  const api = id ? `/apis/job/${id}` : '/apis/job'
+  type Params = null | {
+    page: number
+    pageSize: number
+    search?: string
+  }
+  let params:Params = id ? null : {
+    page,
+    pageSize,
+    search: keyword
+  }
   useEffect(() => {
     async function loadData() {
-      try {
-        setIsLoading(true)
-        setError('')
-        const res = await fetch(url)
-        const json = (await res.json()).slice(0, 3)
-        setTotal(json.length)
-        setJobs(json)
-      } catch (error) {
+      setIsLoading(true)
+      setError('')
+      axios.get(api, {
+        params
+      })
+      .then(({data}) => {
+        const jobs = data.slice(0, 3)
+        setTotal(jobs.length)
+        setJobs(jobs)
+      })
+      .catch((error) => {
         setError('Failed to fetch')
-      } finally {
+      })
+      .then(() => {
         setIsLoading(false)
-      }
+      });
     }
     loadData()
-  }, [url])
+  }, [id, page, pageSize, keyword])
   return { jobs, total, isLoading, error }
 }
 
