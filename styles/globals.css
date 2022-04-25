@@ -159,6 +159,93 @@ input[type='search'] {
   grid-gap: 16px;
 }
 
+.results-pagination {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pagination {
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.pagination-prev {
+}
+
+.pagination-item {
+}
+
+.pagination-item-active {
+  font-weight: 500;
+}
+
+.pagination-next {
+}
+
+.pagination-options {
+  margin-left: 16px;
+}
+
+.pagination-options select {
+  border: none;
+  height: 100%;
+  margin: 0 6px;
+  outline: 0;
+  display: block;
+}
+
+.pagination-prev,
+.pagination-item,
+.pagination-next,
+.pagination-options {
+  display: inline-block;
+  min-width: 32px;
+  height: 32px;
+  line-height: 32px;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  border-radius: 2px;
+  text-align: center;
+  vertical-align: middle;
+  outline: 0;
+  user-select: none;
+}
+
+.pagination-prev,
+.pagination-item {
+  margin-right: 8px;
+}
+
+.pagination-prev:hover,
+.pagination-item:hover,
+.pagination-next:hover,
+.pagination-options:hover,
+.pagination-item-active {
+  color: #1890ff;
+  border-color: #1890ff;
+}
+
+.pagination-prev,
+.pagination-next {
+  padding: 0 6px;
+}
+
+.pagination-prev,
+.pagination-item,
+.pagination-next,
+.pagination-options select {
+  cursor: pointer;
+}
+
+.pagination-disabled,
+.pagination-disabled:hover {
+  cursor: not-allowed;
+  border: 1px solid #d9d9d9;
+  color: #d9d9d9;
+}
+
 .error {
   color: #f00;
 }
