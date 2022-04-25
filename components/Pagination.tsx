@@ -52,7 +52,7 @@ export function Pagination({
   pageSizeOptions = defPageSizeOptions
 }: PaginationProps) {
   // 当前页码
-  const [p, setP] = useState<number>(0)
+  const [p, setP] = useState<number>(1)
   // 每页条数
   const [ps, setPs] = useState<number>(
     showSizeChange ? defPageSizeOptions[0] : pageSize
