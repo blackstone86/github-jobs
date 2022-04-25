@@ -48,10 +48,9 @@ export function FilterableJobList() {
         <JobList jobs={jobs} isLoading={isLoading}>
           <Pagination
             total={total}
-            onChange={(page: number, pageSize: number) => {
-              // console.log(page, pageSize)
-              setPage(page)
-              setPageSize(pageSize)
+            onChange={(p: number, ps: number) => {
+              setPage(p)
+              setPageSize(ps)
             }}
           />
         </JobList>
