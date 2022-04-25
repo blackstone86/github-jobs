@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { JobList } from './JobList'
 import { SearchForm } from './SearchForm'
 import { Header } from './Header'
+import { Pagination } from './Pagination'
 import { useJobs } from './useJobs'
 
 function Filters() {
@@ -31,7 +32,9 @@ function Filters() {
 
 export function FilterableJobList() {
   const [keyword, setKeyword] = useState<string>('')
-  const { jobs, isLoading, error } = useJobs({ keyword })
+  const [page, setPage] = useState<number>(1)
+  const [pageSize, setPageSize] = useState<number>(10)
+  const { jobs, total, isLoading, error } = useJobs({ page, pageSize, keyword })
 
   return (
     <div className="job-list">
@@ -42,7 +45,16 @@ export function FilterableJobList() {
       {error ? (
         <div className="error">{error}</div>
       ) : (
-        <JobList jobs={jobs} isLoading={isLoading} />
+        <JobList jobs={jobs} isLoading={isLoading}>
+          <Pagination
+            total={total}
+            onChange={(page: number, pageSize: number) => {
+              // console.log(page, pageSize)
+              setPage(page)
+              setPageSize(pageSize)
+            }}
+          />
+        </JobList>
       )}
     </div>
   )
