@@ -60,13 +60,9 @@ export function JobList({ jobs, isLoading, children }: JobListProps) {
       ) : jobs.length === 0 ? (
         'No results'
       ) : (
-        <>
-          {jobs.map((job) => (
-            <JobCard {...job} key={job.id} />
-          ))}
-          <div className="results-pagination">{children}</div>
-        </>
+        jobs.map((job) => <JobCard {...job} key={job.id} />)
       )}
+      <div className="results-pagination">{children}</div>
     </div>
   )
 }
