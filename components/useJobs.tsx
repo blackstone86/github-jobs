@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios';
+import axios from 'axios'
 import Job from '../types/job'
 
 type Props = {
@@ -20,29 +20,32 @@ export function useJobs({ page = 1, pageSize = 10, id, keyword }: Props) {
     pageSize: number
     search?: string
   }
-  let params:Params = id ? null : {
-    page,
-    pageSize,
-    search: keyword
-  }
+  let params: Params = id
+    ? null
+    : {
+        page,
+        pageSize,
+        search: keyword
+      }
   useEffect(() => {
     async function loadData() {
       setIsLoading(true)
       setError('')
-      axios.get(api, {
-        params
-      })
-      .then(({data}) => {
-        const jobs = data.slice(0, 3)
-        setTotal(jobs.length)
-        setJobs(jobs)
-      })
-      .catch((error) => {
-        setError('Failed to fetch')
-      })
-      .then(() => {
-        setIsLoading(false)
-      });
+      axios
+        .get(api, {
+          params
+        })
+        .then(({ data }) => {
+          const jobs = data.slice(0, 3)
+          setTotal(jobs.length)
+          setJobs(jobs)
+        })
+        .catch((error) => {
+          setError('Failed to fetch')
+        })
+        .then(() => {
+          setIsLoading(false)
+        })
     }
     loadData()
   }, [id, page, pageSize, keyword])
