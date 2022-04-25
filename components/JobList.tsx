@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import Link from 'next/link'
 import Job from '../types/job'
 
@@ -49,9 +49,10 @@ function LoadingCards({ count }: LoadingCardsProps) {
 type JobListProps = {
   jobs: Job[]
   isLoading: boolean
+  children?: ReactNode
 }
 
-export function JobList({ jobs, isLoading }: JobListProps) {
+export function JobList({ jobs, isLoading, children }: JobListProps) {
   return (
     <div className="results">
       {isLoading ? (
@@ -59,7 +60,12 @@ export function JobList({ jobs, isLoading }: JobListProps) {
       ) : jobs.length === 0 ? (
         'No results'
       ) : (
-        jobs.map((job) => <JobCard {...job} key={job.id} />)
+        <>
+          {jobs.map((job) => (
+            <JobCard {...job} key={job.id} />
+          ))}
+          <div className="results-pagination">{children}</div>
+        </>
       )}
     </div>
   )
