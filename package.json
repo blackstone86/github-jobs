@@ -13,6 +13,7 @@
     "serve": "nodemon --watch server/*.ts --exec \"node --experimental-json-modules --loader ts-node/esm\" server/index.ts"
   },
   "dependencies": {
+    "axios": "^0.26.1",
     "koa": "^2.13.4",
     "koa-router": "^10.1.1",
     "next": "12.1.5",
