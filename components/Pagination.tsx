@@ -112,10 +112,10 @@ export function Pagination({
   }, [p, ps])
 
   const prevClassName = `pagination-prev ${
-    p === 1 ? 'pagination-disabled' : ''
+    p === 1 || total === 0 ? 'pagination-disabled' : ''
   }`
   const nextClassName = `pagination-next ${
-    p === mp ? 'pagination-disabled' : ''
+    p === mp || total === 0 ? 'pagination-disabled' : ''
   }`
 
   return (
@@ -135,7 +135,8 @@ export function Pagination({
           const page: number = ++idx // 页码
           const className = [
             'pagination-item',
-            page === p ? 'pagination-item-active' : ''
+            page === p ? 'pagination-item-active' : '',
+            total === 0 ? 'pagination-disabled' : ''
           ].join(' ')
           return (
             <li
@@ -159,7 +160,7 @@ export function Pagination({
       >
         next
       </li>
-      {showSizeChange && (
+      {showSizeChange && total > 0 && (
         <li className="pagination-options">
           <select
             value={ps}
