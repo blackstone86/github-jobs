@@ -38,11 +38,19 @@ router.get('/job/:id', async (ctx: any) => {
 })
 
 router.get('/job', async (ctx: any) => {
-  const { search, page, pageSize } = ctx.request.query
-  const jobs = ps.filter(({ title }: any) => {
-    return title.toLocaleLowerCase().includes(search.toLowerCase())
+  const query = ctx.request.query
+  const _location = query.location.toLocaleLowerCase()
+  const _fullTime = query.fullTime === 'true'
+  const _keyword = query.keyword.toLocaleLowerCase()
+  const jobs = ps.filter(({ title, type, location }: any) => {
+    const kw = _keyword ? title.toLocaleLowerCase.includes(_keyword) : true
+    const ft = _fullTime ? type.toLocaleLowerCase() === 'full time' : true
+    const lc = _location
+      ? location.toLocaleLowerCase().includes(_location)
+      : true
+    return kw && ft && lc
   })
-  console.log(jobs.length, page, pageSize)
+  const { page, pageSize } = query
   const start = pageSize * (page - 1)
   const end = start + pageSize
   ctx.body = wrapRes({
