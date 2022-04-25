@@ -21,20 +21,35 @@ const ps = positions.map((p: any) => {
 
 const port = 5000
 
+function wrapRes(res: any) {
+  return {
+    msg: 'success',
+    code: 0,
+    result: res
+  }
+}
+
 router.get('/job/:id', async (ctx: any) => {
   const { id } = ctx.params
   const job = ps.filter((p: any) => {
     return id === p.id
   })
-  ctx.body = job
+  ctx.body = wrapRes(job)
 })
 
 router.get('/job', async (ctx: any) => {
-  const keyword = ctx.request.query.search
+  const { search, page, pageSize } = ctx.request.query
   const jobs = ps.filter(({ title }: any) => {
-    return title.toLocaleLowerCase().includes(keyword.toLowerCase())
+    return title.toLocaleLowerCase().includes(search.toLowerCase())
   })
-  ctx.body = jobs
+  console.log(jobs.length, page, pageSize)
+  const start = pageSize * (page - 1)
+  const end = start + pageSize
+  ctx.body = wrapRes({
+    total: jobs.length, // 总记录数
+    page, // 当前页码
+    pageData: jobs.slice(start, end) // 页数据
+  })
 })
 
 app.use(router.routes())
