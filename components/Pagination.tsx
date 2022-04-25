@@ -73,25 +73,25 @@ export function Pagination({
   /**
    * 当前页处理逻辑
    * current 为 number 时
-   * 1.当前页数 > 最大页数，p = 0
+   * 1.当前页数 > 最大页数，p = 1
    * 2.当前页数 <= 0, p = 0
    * ==============================================
    * current 为 undefined 时
-   * 1.没数据时，p = 0
+   * 1.没数据时，p = 1
    * 2.默认当前页数 > 最大页数，赋值最大页数，p = maxpage*
    */
   useEffect(() => {
     if (typeof current === 'number') {
       // current 为 number 时
       if (current > mp || current <= 0) {
-        setP(0)
+        setP(1)
       } else {
         setP(current)
       }
     } else {
       // current 为 undefined 时
       if (total === 0) {
-        setP(0)
+        setP(1)
       } else if (defaultCurrent > mp) {
         setP(mp)
       } else {

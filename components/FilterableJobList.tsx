@@ -71,10 +71,14 @@ export function FilterableJobList() {
   return (
     <div className="job-list">
       <Header>
-        <SearchForm onKeywordChange={(k: string) => setKeyword(k)} />
+        <SearchForm onKeywordChange={(k: string) => {
+          setPage(1)
+          setKeyword(k)
+        }} />
       </Header>
       <Filters
         onChange={(ft: boolean, lc: string) => {
+          setPage(1)
           setFullTime(ft)
           setLocation(lc)
         }}
