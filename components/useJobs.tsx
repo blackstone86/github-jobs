@@ -36,8 +36,19 @@ export function useJobs({ page = 1, pageSize = 10, id, keyword }: Props) {
           params
         })
         .then(({ data }) => {
-          const jobs = data.slice(0, 3)
-          setTotal(jobs.length)
+          let total = 1
+          let jobs: Job[] = []
+          const { code, result } = data
+          if (code === 0) {
+            // 业务正常
+            if (id) {
+              jobs = result
+            } else {
+              jobs = result.pageData
+              total = result.total
+            }
+          }
+          setTotal(total)
           setJobs(jobs)
         })
         .catch((error) => {
