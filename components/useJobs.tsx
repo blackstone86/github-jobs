@@ -7,9 +7,18 @@ type Props = {
   pageSize: number // 每页条数
   id?: string // 职位id
   keyword?: string // 搜索关键字 对应职位记录的 title 字段
+  fullTime?: boolean // 是否全职
+  location?: string // 工作地区
 }
 
-export function useJobs({ page = 1, pageSize = 10, id, keyword }: Props) {
+export function useJobs({
+  page = 1,
+  pageSize = 10,
+  id,
+  keyword,
+  fullTime,
+  location
+}: Props) {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>('')
   const [jobs, setJobs] = useState<Job[]>([])
@@ -18,14 +27,18 @@ export function useJobs({ page = 1, pageSize = 10, id, keyword }: Props) {
   type Params = null | {
     page: number
     pageSize: number
-    search?: string
+    keyword?: string
+    fullTime?: boolean
+    location?: string
   }
   let params: Params = id
     ? null
     : {
         page,
         pageSize,
-        search: keyword
+        keyword,
+        fullTime,
+        location
       }
   useEffect(() => {
     async function loadData() {
@@ -59,7 +72,7 @@ export function useJobs({ page = 1, pageSize = 10, id, keyword }: Props) {
         })
     }
     loadData()
-  }, [id, page, pageSize, keyword])
+  }, [id, page, pageSize, keyword, fullTime, location])
   return { jobs, total, isLoading, error }
 }
 
